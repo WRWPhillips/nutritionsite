@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
-import Select from 'react-select';
+import ReactSelect from 'react-select';
+import styled from 'styled-components';
 import {
   searchSubmit,
   updateQuery,
@@ -8,6 +9,31 @@ import {
 } from '../actions';
 import { debounce } from 'lodash'
 //import Async, {useAsync} from 'react-select';
+
+//styling for Select
+const Select = styled(ReactSelect)`
+  margin: 2%;
+  height: 8vh;
+  border: 3px solid black;
+`
+
+const selectStyles = {
+  option: (provided) => ({
+    ...provided,
+    borderBottom: '2px solid black',
+    padding: 5,
+  }),
+  control: () => ({
+    // none of react-select's styles are passed to <Control />
+    width: 200,
+  }),
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+    return { ...provided, opacity, transition };
+  }
+}
+
 
 const SearchBar = ({
   query,
@@ -45,6 +71,7 @@ const SearchBar = ({
     return (
       <Select
         isLoading={isFetching}
+        styles={selectStyles}
         options={foodNames}
         onInputChange={updateAndSearch}
         onChange={item => setCurrentFood(item, foods)}

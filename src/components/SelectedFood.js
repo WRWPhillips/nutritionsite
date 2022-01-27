@@ -36,7 +36,7 @@ const SelectedFood = ({
         {
           currentFood.foodNutrients.filter((nutrient) => nutrient.value).map((nutrient) => (<Tr key={nutrient.nutrientId}>
             <Td>{nutrient.nutrientName}</Td>
-            <Td>{nutrient.value}{nutrient.unitName}</Td>
+            <Td>{nutrient.value}{nutrient.unitName.toLowerCase()}</Td>
           </Tr>))
         }
       </tbody>
