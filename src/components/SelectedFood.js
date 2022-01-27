@@ -30,13 +30,13 @@ const SelectedFood = ({
     <Table>
       <tbody>
       <Tr>
-      <Th>Nutrient</Th>
+      <Th>Nutrient{currentFood.foodMeasures[0] ? 's per ' + currentFood.foodMeasures[0].disseminationText : 's per unit (unspecified, measured by USDA)'}</Th>
       <Th>Amount</Th>
       </Tr>
         {
-          currentFood.foodNutrients.map((nutrient) => (<Tr key={nutrient.nutrientId}>
+          currentFood.foodNutrients.filter((nutrient) => nutrient.value).map((nutrient) => (<Tr key={nutrient.nutrientId}>
             <Td>{nutrient.nutrientName}</Td>
-            <Td>{nutrient.nutrientNumber}{nutrient.unitName}</Td>
+            <Td>{nutrient.value}{nutrient.unitName}</Td>
           </Tr>))
         }
       </tbody>
