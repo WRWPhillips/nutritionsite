@@ -1,10 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import {
-  fetchFailure,
-  FETCH_FAIL,
-  search,
   searchSubmit,
   updateQuery,
   setCurrentFood
@@ -16,7 +13,6 @@ const SearchBar = ({
   query,
   foods,
   foodNames,
-  search,
   isFetching,
   error,
   searchSubmit,
@@ -72,7 +68,7 @@ const mapDispatchToProps = (dispatch) => ({
   searchSubmit: (query) => searchSubmit(dispatch)(query),
   updateQuery: (query) => dispatch(updateQuery(query)),
   setCurrentFood: (item, foods) => {
-    const newFood = foods.filter(x => x.fdcId == item.value)[0]
+    const newFood = foods.filter(x => x.fdcId === item.value)[0]
     dispatch(setCurrentFood(newFood))
   }
 })
