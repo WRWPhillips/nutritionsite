@@ -8,31 +8,44 @@ import {
   setCurrentFood
 } from '../actions';
 import { debounce } from 'lodash'
-//import Async, {useAsync} from 'react-select';
 
 //styling for Select
 const Select = styled(ReactSelect)`
   margin: 2%;
   height: 8vh;
-  border: 3px solid black;
-`
+  border: none;
 
-const selectStyles = {
-  option: (provided) => ({
-    ...provided,
-    borderBottom: '2px solid black',
-    padding: 5,
-  }),
-  control: () => ({
-    // none of react-select's styles are passed to <Control />
-    width: 200,
-  }),
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = 'opacity 300ms';
-    return { ...provided, opacity, transition };
+  &:focus {
+    outline: none;
   }
-}
+
+  .select__control {
+    border-radius: 0px;
+    border: 1px solid black;
+  }
+
+  .select__control--is-focused {
+    border: none;
+  }
+  .select__indicator-separator {
+    display: none;
+  }
+
+  .select__indicator {
+    color: black;
+    padding: 2px;
+  }
+  .select__option--is-focused {
+    background-color: white !important;
+  }
+  .select__option--is-selected {
+    background-color: white;
+  }
+  .select__menu {
+    margin-top: 0;
+  }
+
+`
 
 
 const SearchBar = ({
@@ -46,7 +59,7 @@ const SearchBar = ({
   setCurrentFood
 }) => {
     const debouncedSearch = useMemo(
-      () => debounce(searchSubmit, 1000),
+      () => debounce(searchSubmit, 500),
       [searchSubmit]
     )
     const updateAndSearch = (newQuery) => {
@@ -71,7 +84,6 @@ const SearchBar = ({
     return (
       <Select
         isLoading={isFetching}
-        styles={selectStyles}
         options={foodNames}
         onInputChange={updateAndSearch}
         onChange={item => setCurrentFood(item, foods)}

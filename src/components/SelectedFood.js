@@ -8,7 +8,7 @@ const Table = styled.table`
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  margin-top: 20vh;
+  margin-top: 3vh;
 `
 const Tr = styled.tr`
   border: 2px solid black;

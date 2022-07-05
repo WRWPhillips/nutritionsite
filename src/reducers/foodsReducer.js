@@ -1,9 +1,8 @@
 import { FETCH_START, FETCH_FAIL, FETCH_SUCCESS, SET_CURRENT_FOOD } from "../actions";
-import mockData from '../MockData/MockData';
 
 const initialState = {
     currentFood: undefined,
-    foods: mockData.foods,
+    foods: [],
     isFetching: false,
     error: ''
 };
